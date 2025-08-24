@@ -234,24 +234,8 @@ modalManager.openModal('modal-id', {
 - **JavaScript**: ES6+ con semicolons
 - **CSS**: BEM methodology para clases
 - **HTML**: Semántico y accesible
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver archivo `LICENSE` para más detalles.
-
-## 📞 Soporte
-
-### Canales de Soporte
-- **Issues**: Reportar bugs y solicitar features
-- **Documentación**: Este README y comentarios en código
-- **Comunidad**: Foros y grupos de usuarios
-
-### Contacto
-- **Email**: soporte@hr365.com
-- **Sitio web**: https://hr365.com
-- **Documentación**: https://docs.hr365.com
-
 ---
 
 **HR365** - Transformando la gestión de recursos humanos 🚀
+
 
