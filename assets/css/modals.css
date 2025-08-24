@@ -1,0 +1,641 @@
+/* HR365 - Sistema de modales personalizado */
+
+/* Modal base */
+.modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1050 !important;
+  display: none !important;
+  overflow: hidden !important;
+  outline: 0 !important;
+  padding: 1rem !important;
+  box-sizing: border-box !important;
+  background: transparent !important;
+}
+
+.modal.show {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  animation: modalFadeIn 0.15s ease-out !important;
+}
+
+/* Overlay del modal */
+.modal-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.01) !important;
+  backdrop-filter: blur(2px) !important;
+  z-index: 1040 !important;
+  display: none !important;
+  opacity: 0 !important;
+  transition: opacity 0.15s ease !important;
+}
+
+.modal-backdrop.show {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Contenedor del modal */
+.modal-content {
+  background: transparent !important;
+  margin: auto !important;
+  border: none !important;
+  border-radius: 16px !important;
+  width: 100% !important;
+  max-width: 800px !important;
+  max-height: 90vh !important;
+  overflow: hidden !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  animation: modalSlideIn 0.15s ease-out !important;
+  position: relative !important;
+  z-index: 1051 !important;
+  transform: scale(0.95) !important;
+  transition: transform 0.15s ease !important;
+}
+
+.modal.show .modal-content {
+  transform: scale(1) !important;
+}
+
+/* Animaciones */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header del modal */
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  padding: 1.5rem !important;
+  border-bottom: none !important;
+  border-radius: 16px 16px 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.modal-title {
+  margin: 0 !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+}
+
+.modal-title i {
+  font-size: 1.25rem !important;
+}
+
+.modal-close {
+  background: none !important;
+  border: none !important;
+  color: white !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  padding: 0.5rem !important;
+  border-radius: 8px !important;
+  transition: all 0.1s ease !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: rotate(90deg) !important;
+}
+
+/* Cuerpo del modal */
+.modal-body {
+  padding: 2rem !important;
+  overflow-y: auto !important;
+  max-height: calc(90vh - 140px) !important;
+  background: white !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+/* Footer del modal */
+.modal-footer {
+  padding: 1.5rem 2rem !important;
+  border-top: 1px solid #e5e7eb !important;
+  background: #f9fafb !important;
+  display: flex !important;
+  gap: 1rem !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+/* Modal de formulario */
+.modal-form .modal-body {
+  padding: 2rem !important;
+}
+
+.modal-form .form-grid-2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1rem !important;
+}
+
+.modal-form .form-row {
+  margin-bottom: 1rem !important;
+}
+
+.modal-form .form-row:last-child {
+  margin-bottom: 0 !important;
+}
+
+.modal-form .form-row label {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 500 !important;
+  color: #374151 !important;
+}
+
+.modal-form .form-row input,
+.modal-form .form-row select {
+  width: 100% !important;
+}
+
+.modal-form .form-row small {
+  display: block !important;
+  margin-top: 0.25rem !important;
+  color: #6b7280 !important;
+}
+
+/* Estilos generalizados para formularios */
+.form-row {
+  margin-bottom: 1rem !important;
+}
+
+.form-row:last-child {
+  margin-bottom: 0 !important;
+}
+
+.form-row label {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100% !important;
+  padding: 0.75rem 1rem !important;
+  border: 2px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  color: #374151 !important;
+  background: white !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none !important;
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+}
+
+.form-row input:hover,
+.form-row select:hover,
+.form-row textarea:hover {
+  border-color: #d1d5db !important;
+}
+
+.form-row small {
+  display: block !important;
+  margin-top: 0.25rem !important;
+  color: #6b7280 !important;
+  font-size: 0.875rem !important;
+  font-style: italic !important;
+}
+
+/* Grid de formularios */
+.grid-2 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1rem !important;
+}
+
+.grid-3 {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1rem !important;
+}
+
+.grid-4 {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1rem !important;
+}
+
+/* Botones de formulario */
+.button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  background: #667eea !important;
+  color: white !important;
+  min-width: 120px !important;
+}
+
+.button:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+
+.button:active {
+  transform: translateY(0) !important;
+}
+
+.button:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Variantes de botones */
+.button.btn-primary {
+  background: #667eea !important;
+}
+
+.button.btn-success {
+  background: #10b981 !important;
+}
+
+.button.btn-warning {
+  background: #f59e0b !important;
+}
+
+.button.btn-danger {
+  background: #ef4444 !important;
+}
+
+.button.btn-secondary {
+  background: #6b7280 !important;
+}
+
+.button.btn-info {
+  background: #3b82f6 !important;
+}
+
+/* Botones de acción en modales */
+.modal-actions {
+  display: flex !important;
+  gap: 1rem !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  padding: 1rem 0 !important;
+}
+
+.modal-actions .button {
+  min-width: 120px !important;
+}
+
+.modal-actions .button:only-child {
+  margin-left: auto !important;
+}
+
+/* Modal dinámico */
+.modal-dynamic .modal-body {
+  padding: 0 !important;
+  min-height: 200px !important;
+  background: white !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+.modal-iframe {
+  width: 100% !important;
+  height: 70vh !important;
+  border: 0 !important;
+  background: white !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+/* Modal de confirmación */
+.modal-confirm {
+  max-width: 500px !important;
+}
+
+.modal-confirm .modal-body {
+  text-align: center !important;
+  padding: 3rem 2rem !important;
+  background: white !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+.modal-confirm .modal-icon {
+  font-size: 4rem !important;
+  margin-bottom: 1.5rem !important;
+  color: #ef4444 !important;
+}
+
+.modal-confirm .modal-message {
+  font-size: 1.25rem !important;
+  margin-bottom: 1rem !important;
+  color: #374151 !important;
+}
+
+.modal-confirm .modal-description {
+  color: #6b7280 !important;
+  font-size: 1rem !important;
+}
+
+/* Modal de vista */
+.modal-view .modal-body {
+  padding: 0 !important;
+  background: white !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+.modal-view .view-content {
+  padding: 2rem !important;
+}
+
+.modal-view .view-section {
+  margin-bottom: 2rem !important;
+}
+
+.modal-view .view-section:last-child {
+  margin-bottom: 0 !important;
+}
+
+.modal-view .section-title {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  color: #667eea !important;
+  margin-bottom: 1rem !important;
+  padding-bottom: 0.5rem !important;
+  border-bottom: 2px solid #e5e7eb !important;
+}
+
+.modal-view .info-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+.modal-view .info-item {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+.modal-view .info-label {
+  font-size: 0.875rem !important;
+  color: #6b7280 !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.modal-view .info-value {
+  font-size: 1rem !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+/* Modal de tabla */
+.modal-table .table-responsive {
+  max-height: 400px !important;
+  overflow-y: auto !important;
+}
+
+.modal-table .table {
+  margin-bottom: 0 !important;
+}
+
+.modal-table .table th {
+  background: #f8fafc !important;
+  border-bottom: 2px solid #e5e7eb !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+  padding: 1rem !important;
+}
+
+.modal-table .table td {
+  padding: 1rem !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Estados de carga en modales */
+.modal-loading {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2rem !important;
+}
+
+.modal-loading .spinner-border {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal {
+    padding: 0.5rem !important;
+  }
+  
+  .modal-content {
+    width: 100% !important;
+    margin: 0 !important;
+    max-height: calc(100vh - 1rem) !important;
+    border-radius: 12px !important;
+  }
+  
+  .modal-body {
+    padding: 1rem !important;
+    max-height: calc(100vh - 140px) !important;
+    border-radius: 0 0 12px 12px !important;
+  }
+  
+  .modal-footer {
+    padding: 1rem !important;
+    flex-direction: column !important;
+    border-radius: 0 0 12px 12px !important;
+  }
+  
+  .modal-footer .button {
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .modal-footer .button:last-child {
+    margin-bottom: 0 !important;
+  }
+  
+  .modal-form .form-grid-2,
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .modal-header {
+    padding: 1rem !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+  
+  .modal-title {
+    font-size: 1.25rem !important;
+  }
+  
+  .modal-dynamic .modal-body,
+  .modal-iframe {
+    border-radius: 0 0 12px 12px !important;
+  }
+  
+  .modal-actions {
+    flex-direction: column !important;
+  }
+  
+  .modal-actions .button {
+    width: 100% !important;
+  }
+}
+
+/* Estados de carga */
+.modal-loading {
+  position: relative !important;
+}
+
+.modal-loading::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 1 !important;
+}
+
+.modal-loading::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin: -20px 0 0 -20px !important;
+  border: 4px solid #e5e7eb !important;
+  border-top: 4px solid #667eea !important;
+  border-radius: 50% !important;
+  animation: spin 0.8s linear infinite !important;
+  z-index: 2 !important;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modales específicos */
+.modal-personal .modal-body {
+  max-height: 70vh !important;
+}
+
+.modal-personal .form-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+.modal-personal .form-group.full-width {
+  grid-column: 1 / -1 !important;
+}
+
+.modal-personal .form-group.full-width textarea {
+  min-height: 80px !important;
+  resize: vertical !important;
+}
+
+/* Cerrar modal con tecla Escape */
+.modal[tabindex="-1"]:focus {
+  outline: none !important;
+}
+
+/* Mejoras de accesibilidad */
+.modal:focus {
+  outline: none !important;
+}
+
+.modal-content:focus {
+  outline: none !important;
+}
+
+/* Transiciones suaves y rápidas */
+.modal,
+.modal-backdrop,
+.modal-content {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Reset específico para evitar contenedores blancos */
+.modal * {
+  box-sizing: border-box !important;
+}
+
+.modal-content > *:not(.modal-header):not(.modal-body):not(.modal-footer) {
+  background: transparent !important;
+} 

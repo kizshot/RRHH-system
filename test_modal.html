@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Modal</title>
+    <link rel="stylesheet" href="assets/css/modals.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .test-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .button {
+        background: #667eea;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 5px;
+        font-size: 14px;
+      }
+      .button:hover {
+        background: #5a67d8;
+      }
+      .input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <h1>Test de Modales</h1>
+      <p>
+        Esta es una página de prueba para verificar que los modales funcionen
+        correctamente.
+      </p>
+
+      <button class="button" onclick="showModal('modal-create')">
+        <i class="fa fa-user-plus"></i> Abrir Modal de Usuario
+      </button>
+
+      <button class="button" onclick="showModal('modal-dynamic')">
+        <i class="fa fa-window-restore"></i> Abrir Modal Dinámico
+      </button>
+    </div>
+
+    <!-- Modal crear usuario -->
+    <div
+      class="modal modal-form"
+      id="modal-create"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <div class="modal-content">
+        <header class="modal-header">
+          <h3 id="modalTitle" class="modal-title">
+            <i class="fa fa-user-plus"></i> Agregar Usuario
+          </h3>
+          <button
+            class="modal-close"
+            onclick="hideModal('modal-create')"
+            title="Cerrar"
+          >
+            <i class="fa fa-times"></i>
+          </button>
+        </header>
+        <form>
+          <div class="modal-body">
+            <div class="form-grid-2">
+              <div class="form-row">
+                <label for="first_name">Nombre</label>
+                <input
+                  class="input"
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                />
+              </div>
+              <div class="form-row">
+                <label for="last_name">Apellidos</label>
+                <input
+                  class="input"
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                />
+              </div>
+              <div class="form-row">
+                <label for="email">Email</label>
+                <input class="input" type="email" id="email" name="email" />
+              </div>
+              <div class="form-row">
+                <label for="role">Rol</label>
+                <select class="input" id="role" name="role">
+                  <option value="">-- Seleccionar --</option>
+                  <option value="admin">Administrador</option>
+                  <option value="user">Usuario</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="button"
+              onclick="hideModal('modal-create')"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="button">
+              <i class="fa fa-save"></i> Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal dinámico -->
+    <div
+      class="modal modal-dynamic"
+      id="modal-dynamic"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalDynTitle"
+    >
+      <div class="modal-content">
+        <header class="modal-header">
+          <h3 id="modalDynTitle" class="modal-title">
+            <i class="fa fa-window-restore"></i> Modal Dinámico
+          </h3>
+          <button
+            class="modal-close"
+            onclick="hideModal('modal-dynamic')"
+            title="Cerrar"
+          >
+            <i class="fa fa-times"></i>
+          </button>
+        </header>
+        <div class="modal-body">
+          <p>
+            Este es un modal dinámico de prueba. Puedes cerrarlo haciendo clic
+            en el botón X o presionando Escape.
+          </p>
+          <p>
+            El modal está perfectamente centrado y tiene un overlay de fondo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="modal-backdrop" id="modal-overlay"></div>
+
+    <script>
+      function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = document.getElementById("modal-overlay");
+
+        if (modal && overlay) {
+          modal.classList.add("show");
+          overlay.classList.add("show");
+          document.body.style.overflow = "hidden";
+        }
+      }
+
+      function hideModal(modalId) {
+        const modal = document.getElementById(modalId);
+        const overlay = document.getElementById("modal-overlay");
+
+        if (modal && overlay) {
+          modal.classList.remove("show");
+          overlay.classList.remove("show");
+          document.body.style.overflow = "";
+        }
+      }
+
+      // Cerrar modal con Escape
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          const openModals = document.querySelectorAll(".modal.show");
+          openModals.forEach((modal) => {
+            hideModal(modal.id);
+          });
+        }
+      });
+
+      // Cerrar modal al hacer clic en el overlay
+      document
+        .getElementById("modal-overlay")
+        .addEventListener("click", function () {
+          const openModals = document.querySelectorAll(".modal.show");
+          openModals.forEach((modal) => {
+            hideModal(modal.id);
+          });
+        });
+    </script>
+  </body>
+</html>
